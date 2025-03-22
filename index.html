@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Prank</title>
+    <style>
+        body { 
+            text-align: center;
+            font-family: 'Courier New', monospace; 
+            margin: 0; padding: 0;
+            background-color: black; 
+            color: lime; 
+            transition: background-color 1s ease-in-out; 
+        }
+        #hackingScreen, #birthdayScreen, #surpriseText { display: none; }
+        .scan-text { 
+            font-size: 24px; 
+            margin-top: 35%; 
+            animation: blink 0.8s infinite alternate; 
+        }
+        .hacked { 
+            font-size: 32px; color: red; 
+            font-weight: bold; 
+            animation: glitch 0.2s infinite alternate; 
+        }
+        .hidden { 
+            display: none;
+        }
+        .btn { 
+            padding: 10px 20px; 
+            font-size: 20px; 
+            margin-top: 20px; cursor: pointer; 
+            background: rgb(236, 0, 0); 
+            color: white; border: none; 
+        }
+        .surprise-text {
+            font-size: 50px;
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+            margin-top: 20px;
+            display: none;
+            padding-top: 50px;
+        }
+        @keyframes blink { from { opacity: 1; } to { opacity: 0.5; } }
+        @keyframes glitch { from { transform: translateX(-2px); } to { transform: translateX(2px); } }
+    </style>
+</head>
+<body>
+    <audio id="hackingSound">
+        <source src="nameme.mp3" type="audio/mp3">
+    </audio>
+    
+    <div id="hackingScreen">
+        <p class="scan-text">Scanning your device...</p>
+    </div>
+    
+    <div id="hackedScreen" class="hidden">
+        <p class="hacked">Your device has been hacked!</p>
+        <button class="btn" onclick="showBirthdayScreen()">Next</button>
+    </div>
+    
+    <div id="birthdayScreen" class="hidden" style="background: url('/mnt/data/happy.jpeg') no-repeat center center; background-size: cover; height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+        <p id="surpriseText" class="surprise-text">
+            SURPRISE!!<br><br>
+            Happy birthday! ...
+        </p>
+    </div>
+    
+    <script>
+        document.getElementById("hackingScreen").style.display = "block";
+        let sound = document.getElementById("hackingSound");
+        sound.play();
+
+        setTimeout(() => {
+            document.getElementById("hackingScreen").style.display = "none";
+            document.getElementById("hackedScreen").classList.remove("hidden");
+        }, 7000);
+
+        function showBirthdayScreen() {
+            document.getElementById("hackedScreen").style.display = "none";
+            document.getElementById("birthdayScreen").style.display = "block";
+            document.body.style.backgroundColor = "#FFA2BE"; 
+            sound.pause();
+            setTimeout(() => {
+                document.getElementById("surpriseText").style.display = "block";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
